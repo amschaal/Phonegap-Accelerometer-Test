@@ -1,4 +1,4 @@
-var n = 50,
+var n = 200,
     random = d3.randomNormal(0, 10),
     data = [];//d3.range(n).map(random);
 
