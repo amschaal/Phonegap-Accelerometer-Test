@@ -85,5 +85,5 @@ function generateData(){
 	setTimeout(generateData,500);
 	draw();
 }
-generateData();
+//generateData();
 

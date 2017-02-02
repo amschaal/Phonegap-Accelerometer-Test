@@ -16,24 +16,46 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="fastclick.js"></script>
     <script src="d3.v4.min.js"></script>
-    <script type="text/javascript">
+    
+</head>
+<body >
+<svg width="960" height="500"></svg>
+<div id=header class="button button-block button-large">
+    <img align=left src=favicon-48x48.png>
+    Phonegap Accelerometer Test
+</div>
+<p />&nbsp;<p />
+<button id=clearWatch onclick='accelOff()' class="button button-pill button-primary button-large">Clear Watch</button>
+
+<button id=exitApp onclick='navigator.app.exitApp()' class="button button-pill button-primary button-large">Exit</button>
+
+<div id=ax class="button button-block button-action button-large" style="margin:1em;">X <span id=accelX></span></div>
+
+<div id=ay class="button button-block button-action button-large" style="margin:1em;">Y <span id=accelY></span></div>
+
+<div id=az class="button button-block button-action button-large" style="margin:1em;">Z <span id=accelZ></span></div>
+
+<div id=ts class="button button-block button-primary button-large" style="margin:1em;">TS <span id=timestamp></span></div>
+
+<div class="copyright" style="padding:5px;align:left;font-style:italic;font-size:small;">
+    <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
+</div>
+<script src="viz.js"></script>
+<script type="text/javascript">
     var gWatchID = null;
-    var gOptions = { frequency: 2000 };  // Update every 3 seconds
+    var gOptions = { frequency: 100 };  // Update every 3 seconds
     //
     // Wait for PhoneGap to load
     document.addEventListener("deviceready", onDeviceReady, false);
     //
-    function accelClear() {
-        document.getElementById('accelX').innerHTML = '&nbsp;';
-        document.getElementById('accelY').innerHTML = '&nbsp;';
-        document.getElementById('accelZ').innerHTML = '&nbsp;';
-        document.getElementById('timestamp').innerHTML = '&nbsp;';
-    }
     function accelUpdate(acceleration) {
-        document.getElementById('accelX').innerHTML = acceleration.x;
+	document.getElementById('accelX').innerHTML = acceleration.x;
         document.getElementById('accelY').innerHTML = acceleration.y;
         document.getElementById('accelZ').innerHTML = acceleration.z;
         document.getElementById('timestamp').innerHTML = acceleration.timestamp;
+        data.push(acceleration)
+//	console.log('data',data);
+	draw();
     }
     function accelOff() {
         navigator.accelerometer.clearWatch(gWatchID);
@@ -60,35 +82,6 @@
                 },
                 gOptions);
     }
-    //
-    function onLoad() {
-        accelClear();
-    }
-
-Accelerometer    </script>
-</head>
-<body onload="onLoad()">
-<svg width="960" height="500"></svg>
-<div id=header class="button button-block button-large">
-    <img align=left src=favicon-48x48.png>
-    Phonegap Accelerometer Test
-</div>
-<p />&nbsp;<p />
-<button id=clearWatch onclick='accelOff()' class="button button-pill button-primary button-large">Clear Watch</button>
-
-<button id=exitApp onclick='navigator.app.exitApp()' class="button button-pill button-primary button-large">Exit</button>
-
-<div id=ax class="button button-block button-action button-large" style="margin:1em;">X <span id=accelX></span></div>
-
-<div id=ay class="button button-block button-action button-large" style="margin:1em;">Y <span id=accelY></span></div>
-
-<div id=az class="button button-block button-action button-large" style="margin:1em;">Z <span id=accelZ></span></div>
-
-<div id=ts class="button button-block button-primary button-large" style="margin:1em;">TS <span id=timestamp></span></div>
-
-<div class="copyright" style="padding:5px;align:left;font-style:italic;font-size:small;">
-    <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
-</div>
-<script src="viz.js"></script>
+</script>
 </body>
 </html>
