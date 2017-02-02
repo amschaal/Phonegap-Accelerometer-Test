@@ -8,10 +8,27 @@
     body {margin:0px;font-size:large;}
     .hidden {visibility:collapse;display:none;}
     .expose {visibility:visible;display:block;}
-    .copyright {padding:5px;align:left;font-style:italic;font-size:small;}
     #header {margin:0;padding:0;}
     #exitApp {margin:0.1em;float:right;}
     #clearWatch {margin:0.1em;}
+
+   	.line {
+	  fill: none;
+	  stroke: #000;
+	  stroke-width: 2px;
+	}
+	.x-line{
+	  fill: none;
+	  stroke: green;
+	}
+	.y-line{
+	  fill: none;
+	  stroke: blue;
+	}
+	.z-line{
+	  fill: none;
+	  stroke: red;
+	}
     </style>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="fastclick.js"></script>
@@ -37,13 +54,10 @@
 
 <div id=ts class="button button-block button-primary button-large" style="margin:1em;">TS <span id=timestamp></span></div>
 
-<div class="copyright" style="padding:5px;align:left;font-style:italic;font-size:small;">
-    <span id=copyright>Created by Jesus Monroy, Jr. &copy; 2015</span>
-</div>
 <script src="viz.js"></script>
 <script type="text/javascript">
     var gWatchID = null;
-    var gOptions = { frequency: 100 };  
+    var gOptions = { frequency: 50 };  
     //
     // Wait for PhoneGap to load
     document.addEventListener("deviceready", onDeviceReady, false);

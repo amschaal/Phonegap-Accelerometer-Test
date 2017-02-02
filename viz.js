@@ -49,29 +49,29 @@ g.append("g")
 function draw() {
    if (data.length > n)
 	data.shift();
-   svg.selectAll('.line').remove(); 
+   svg.selectAll('.lines g').remove(); 
 //    .attr("clip-path", "url(#clip)")
-  svg.selectAll('.lines').append("path")
+  svg.selectAll('.lines').append('g').append("path")
     .datum(data)
-    .attr("class", "line")
+    .attr("class", "x-line")
     .attr("stroke", "steelblue")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", xLine)
       .attr("transform", "translate(" + x(n-data.length) + ",0)");
-   svg.selectAll('.lines').append("path")
+   svg.selectAll('.lines').append('g').append("path")
     .datum(data)
-    .attr("class", "line")
+    .attr("class", "y-line")
     .attr("stroke", "red")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", yLine)
       .attr("transform", "translate(" + x(n-data.length) + ",0)");
-   svg.selectAll('.lines').append("path")
+   svg.selectAll('.lines').append('g').append("path")
     .datum(data)
-    .attr("class", "line")
+    .attr("class", "z-line")
     .attr("stroke", "orange")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
@@ -82,7 +82,7 @@ function draw() {
 function generateData(){
 	data.push({x:random(),y:random(),z:random()})
 //	console.log('data',data);
-	setTimeout(generateData,500);
+	//setTimeout(generateData,500);
 	draw();
 }
 //generateData();
