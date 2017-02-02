@@ -41,29 +41,32 @@
 <button id=clearWatch onclick='accelOff()' class="button button-pill button-primary button-large">Clear Watch</button>
 
 <button id=exitApp onclick='navigator.app.exitApp()' class="button button-pill button-primary button-large">Exit</button>
-
-<div id=ax class="button button-block button-action button-large" style="margin:1em;">X <span id=accelX></span></div>
-
-<div id=ay class="button button-block button-action button-large" style="margin:1em;">Y <span id=accelY></span></div>
-
-<div id=az class="button button-block button-action button-large" style="margin:1em;">Z <span id=accelZ></span></div>
+<div>Avg Mag: <span id="accelAvgMag"></span></div>
+<div>Mag: <span id="accelMag"></span></div>
+<div>X: <span id=accelX></span></div>
+<div>Y: <span id=accelY></span></div>
+<div>Z <span id=accelZ></span></div>
 
 <div id=ts class="button button-block button-primary button-large" style="margin:1em;">TS <span id=timestamp></span></div>
 
 <script src="viz.js"></script>
 <script type="text/javascript">
     var gWatchID = null;
+    var magnitude = 0;
     var gOptions = { frequency: 50 };  
     //
     // Wait for PhoneGap to load
     document.addEventListener("deviceready", onDeviceReady, false);
     //
     function accelUpdate(acceleration) {
+	acceleration.magnitude = Math.sqrt(acceleration.x*acceleration.x+acceleration.y*acceleration.y+acceleration.z*acceleration.z)        
+	data.push(acceleration)
+	document.getElementById('accelAvgMag').innerHTML = d3.mean(data,function(d){return d.magnitude});
+	document.getElementById('accelMag').innerHTML = acceleration.magnitude;	
 	document.getElementById('accelX').innerHTML = acceleration.x;
         document.getElementById('accelY').innerHTML = acceleration.y;
         document.getElementById('accelZ').innerHTML = acceleration.z;
         document.getElementById('timestamp').innerHTML = acceleration.timestamp;
-        data.push(acceleration)
 //	console.log('data',data);
 	draw();
     }
